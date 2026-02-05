@@ -9,20 +9,27 @@ import numpy as np
 from typing import Tuple
 
 
-def load_train_data(filepath: str = "data/train_data.csv") -> pd.DataFrame:
+def load_train_data(filepath: str = None) -> pd.DataFrame:
     """
     Load training data from CSV.
 
     Parameters
     ----------
     filepath : str
-        Path to the training data CSV
+        Path to the training data CSV. If None, uses the default location
+        in the R code directory.
 
     Returns
     -------
     pd.DataFrame
         Training data
     """
+    if filepath is None:
+        # Use the data from the R code directory
+        import os
+        code_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        filepath = os.path.join(code_dir, "code_neurips2020", "data", "train_data.csv")
+
     df = pd.read_csv(filepath)
     return df
 

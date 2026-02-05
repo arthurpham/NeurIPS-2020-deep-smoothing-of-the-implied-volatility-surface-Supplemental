@@ -53,18 +53,15 @@ def main():
     print("Python Implementation")
     print("=" * 60)
 
-    # Change to script directory to find data
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(os.path.dirname(script_dir))
     print(f"\nWorking directory: {os.getcwd()}")
 
     # Initialize TensorFlow session
     print("\n--- Initializing TensorFlow Session ---")
     sess = reset_tf_session(gpu_mem_frac=0.1, seed=1, verbose=True)
 
-    # Load training data
+    # Load training data (from R code directory)
     print("\n--- Loading Training Data ---")
-    df_train = load_train_data("data/train_data.csv")
+    df_train = load_train_data()
     print(f"Loaded {len(df_train)} observations")
     print(f"TTM range: [{df_train['ttm'].min():.4f}, {df_train['ttm'].max():.4f}]")
     print(f"LogM range: [{df_train['logm'].min():.4f}, {df_train['logm'].max():.4f}]")
